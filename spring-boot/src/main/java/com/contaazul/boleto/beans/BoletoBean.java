@@ -1,6 +1,7 @@
 package com.contaazul.boleto.beans;
 
 import com.contaazul.boleto.entities.enums.StatusEnum;
+import com.contaazul.boleto.validations.annotations.BrazilMoneyValidation;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -32,6 +33,7 @@ public class BoletoBean implements Serializable {
     @NotNull(message = "Can not be empty")
     @JsonProperty(value = "total_in_cents")
     @Size(max = 15, message = "Max 15 characters")
+    @BrazilMoneyValidation
     private String totalInCents;
 
     @NotNull(message = "Can not be empty")

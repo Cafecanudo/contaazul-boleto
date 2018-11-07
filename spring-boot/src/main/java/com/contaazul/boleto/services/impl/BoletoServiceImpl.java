@@ -35,6 +35,7 @@ public class BoletoServiceImpl implements BoletoService {
     @Override
     public BoletoBean criarBoleto(BoletoBean boletoBean) {
         log.info("Criando um novo Boleto...");
+        boletoBean.setTotalInCents(formatNumberDecimal());
         return converter(boletoRepository.save(converter(boletoBean)));
     }
 
@@ -52,18 +53,23 @@ public class BoletoServiceImpl implements BoletoService {
      * @return
      */
     private Boleto calcularJuros(Boleto boleto) {
-        long diferencaEmDias = ChronoUnit.DAYS.between(boleto.getDueDate(), LocalDate.now());
-        boleto.setTotalInCents(diferencaEmDias > 0 ?
-                (diferencaEmDias <= 10 ?
-                        /*Juros Simples 0,5%*/ calculaJuros(boleto.getTotalInCents(), 0.5D) :
-                        /*Juros Simples 1.0%*/ calculaJuros(boleto.getTotalInCents(), 1.0D))
-                : boleto.getTotalInCents());
+        Long diffDias = ChronoUnit.DAYS.between(boleto.getDueDate(), LocalDate.now());
+        boleto.setTotalInCents(
+                calculaJuros(boleto.getTotalInCents(), diffDias <= 10 ? 0.5D : 1.0, diffDias.intValue())
+        );
         return boleto;
     }
 
-    private BigDecimal calculaJuros(BigDecimal valor, double juros) {
-        return new BigDecimal((valor.doubleValue() * juros) + valor.doubleValue());
-
+    /**
+     * Calcular juros simples.
+     *
+     * @param valor
+     * @param juros
+     * @param dias
+     * @return
+     */
+    private BigDecimal calculaJuros(BigDecimal valor, double juros, int dias) {
+        return new BigDecimal(valor.doubleValue() * (1 + (juros / 100) * dias));
     }
 
     /**
