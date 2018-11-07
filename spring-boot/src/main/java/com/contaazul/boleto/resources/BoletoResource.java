@@ -7,30 +7,45 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
-@RequestMapping("/boletos")
+@RequestMapping("/rest/bankslips")
 public class BoletoResource {
 
     @Autowired
     private BoletoService boletoService;
 
     @GetMapping
-    public List<BoletoBean> findAll() {
-        return boletoService.findAll();
+    public List<BoletoBean> listarBoletos() {
+        return boletoService.listarBoletos();
+    }
+
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public BoletoBean criarBoleto(@Valid @RequestBody BoletoBean boletoBean) {
+        return boletoService.criarBoleto(boletoBean);
     }
 
     @GetMapping("/{id}")
-    public BoletoBean findById(@PathVariable Long id) {
-        return boletoService.findById(id);
+    public BoletoBean detalhesBoleto(@NotNull(message = "Id required") @PathVariable String id) {
+        return boletoService.detalhesBoleto(id);
     }
+
+
+
+
+
+    /*
+
 
     @RequestMapping(method = RequestMethod.POST)
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
-    public BoletoBean append(@RequestBody BoletoBean boletoBean) {
-        return boletoService.append(boletoBean);
+    public BoletoBean criarBoleto(@RequestBody BoletoBean boletoBean) {
+        return boletoService.criarBoleto(boletoBean);
     }
 
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
@@ -43,5 +58,5 @@ public class BoletoResource {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         boletoService.delete(id);
-    }
+    }*/
 }
