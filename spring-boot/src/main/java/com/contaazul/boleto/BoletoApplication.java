@@ -1,7 +1,6 @@
 package com.contaazul.boleto;
 
 import com.contaazul.boleto.entities.Boleto;
-import com.contaazul.boleto.entities.enums.StatusEnum;
 import com.contaazul.boleto.repositories.BoletoRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +26,13 @@ public class BoletoApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
-        log.info("Inserting -> { CONTAAZUL ADMIN}",
-                boletoRepository.save(new Boleto(1L, LocalDate.now(), new BigDecimal(100000), "Boleto Inicial", StatusEnum.PENDING)));
+    public void run(String... args) {
+        log.info("Inserting -> { Boleto com 5 dias de vencido }",
+                boletoRepository.save(Boleto.builder().dueDate(LocalDate.now().minusDays(5))
+                        .totalInCents(new BigDecimal(100000)).customer("Boleto 5 dias vencido").build()));
+
+        log.info("Inserting -> { Boleto com mais de 10 dias de vencido }",
+                boletoRepository.save(Boleto.builder().dueDate(LocalDate.now().minusDays(11))
+                        .totalInCents(new BigDecimal(100000)).customer("Boleto 10 dias vencido").build()));
     }
 }

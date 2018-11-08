@@ -6,13 +6,16 @@ import java.util.List;
 
 public interface BoletoService {
 
-    List<BoletoBean> findAll();
+    List<BoletoBean> listarBoletos();
 
-    BoletoBean findById(long id);
+    BoletoBean criarBoleto(BoletoBean boletoBean);
 
-    BoletoBean append(BoletoBean boletoBean);
+    BoletoBean detalhesBoleto(String id);
 
+    void marcarComoPago(String id);
+
+    /*
     void update(BoletoBean boletoBean);
 
-    void delete(Long id);
+    void delete(Long id);*/
 }
