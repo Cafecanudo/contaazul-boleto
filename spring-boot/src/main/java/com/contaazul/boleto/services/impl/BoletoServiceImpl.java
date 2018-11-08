@@ -5,11 +5,13 @@ import com.contaazul.boleto.entities.Boleto;
 import com.contaazul.boleto.exceptions.NoResultExceptionApi;
 import com.contaazul.boleto.repositories.BoletoRepository;
 import com.contaazul.boleto.services.BoletoService;
+import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -35,15 +37,36 @@ public class BoletoServiceImpl implements BoletoService {
     @Override
     public BoletoBean criarBoleto(BoletoBean boletoBean) {
         log.info("Criando um novo Boleto...");
-        boletoBean.setTotalInCents(formatNumberDecimal());
+        boletoBean.setTotalInCents(String.format("%.2f", Double.valueOf("1") / 100.0));
+//        boletoBean.setTotalInCents(formatNumberDecimal(boletoBean.getTotalInCents()));
+        System.out.println(boletoBean.getTotalInCents());
         return converter(boletoRepository.save(converter(boletoBean)));
     }
 
     @Override
-    public BoletoBean detalhesBoleto(String id) {
+    public BoletoBean detalhesBoleto(@NonNull String id) {
         log.info("Buscando um boleto...");
         Optional<Boleto> data = boletoRepository.findById(UUID.fromString(id));
         return data.map(b -> converter(calcularJuros(data.get()))).orElseThrow(() -> new NoResultExceptionApi(NO_FOUND_MESSAGE));
+    }
+
+    @Override
+    public void marcarComoPago(@NonNull String id) {
+
+    }
+
+    public static void main(String[] args) {
+        System.out.println();
+    }
+
+    /**
+     * Formatar numero para decimal 2 casa
+     *
+     * @param valor
+     * @return
+     */
+    private String formatNumberDecimal(String valor) {
+        return new DecimalFormat("######0.##").format(Double.valueOf(valor));
     }
 
     /**

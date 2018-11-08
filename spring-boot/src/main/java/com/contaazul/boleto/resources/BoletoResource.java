@@ -34,6 +34,11 @@ public class BoletoResource {
         return boletoService.detalhesBoleto(id);
     }
 
+    @PostMapping("/{id}/payments")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void marcarComoPago(@NotNull(message = "Id required") @PathVariable String id){
+        boletoService.marcarComoPago(id);
+    }
 
 
 

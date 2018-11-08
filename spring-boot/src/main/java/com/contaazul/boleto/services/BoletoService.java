@@ -12,6 +12,8 @@ public interface BoletoService {
 
     BoletoBean detalhesBoleto(String id);
 
+    void marcarComoPago(String id);
+
     /*
     void update(BoletoBean boletoBean);
 
