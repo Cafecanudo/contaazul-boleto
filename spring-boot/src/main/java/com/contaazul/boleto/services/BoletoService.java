@@ -2,17 +2,19 @@ package com.contaazul.boleto.services;
 
 import com.contaazul.boleto.beans.BoletoBean;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface BoletoService {
 
-    List<BoletoBean> findAll();
+    List<BoletoBean> listarBoletos();
 
-    BoletoBean findById(long id);
+    BoletoBean criarBoleto(BoletoBean boletoBean);
 
-    BoletoBean append(BoletoBean boletoBean);
+    BoletoBean detalhesBoleto(String id);
 
-    void update(BoletoBean boletoBean);
+    void pagarBoleto(String id, LocalDate data);
 
-    void delete(Long id);
+    void cancelarBoleto(String id);
+
 }

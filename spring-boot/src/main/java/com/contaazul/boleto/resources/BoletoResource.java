@@ -7,41 +7,46 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping("/boletos")
+@RequestMapping("/rest/bankslips")
 public class BoletoResource {
 
     @Autowired
     private BoletoService boletoService;
 
     @GetMapping
-    public List<BoletoBean> findAll() {
-        return boletoService.findAll();
+    @ResponseBody
+    public List<BoletoBean> listarBoletos() {
+        return boletoService.listarBoletos();
+    }
+
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public BoletoBean criarBoleto(@Valid @RequestBody BoletoBean boletoBean) {
+        return boletoService.criarBoleto(boletoBean);
     }
 
     @GetMapping("/{id}")
-    public BoletoBean findById(@PathVariable Long id) {
-        return boletoService.findById(id);
+    public BoletoBean detalhesBoleto(@NotNull(message = "Id required") @PathVariable String id) {
+        return boletoService.detalhesBoleto(id);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(value = HttpStatus.OK)
-    public BoletoBean append(@RequestBody BoletoBean boletoBean) {
-        return boletoService.append(boletoBean);
-    }
-
+    @PostMapping(value = "/{id}/payments", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    @RequestMapping(method = RequestMethod.PUT)
-    public void update(@RequestBody BoletoBean boletoBean) {
-        boletoService.update(boletoBean);
+    public void pagarBoleto(@NotNull(message = "Id required") @PathVariable String id,
+                            @Valid @RequestBody HashMap<String, LocalDate> requestData) {
+        boletoService.pagarBoleto(id, requestData.get("payment_date"));
     }
 
-    @ResponseStatus(value = HttpStatus.OK)
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        boletoService.delete(id);
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void cancelarBoleto(@NotNull(message = "Id required") @PathVariable String id) {
+        boletoService.cancelarBoleto(id);
     }
 }

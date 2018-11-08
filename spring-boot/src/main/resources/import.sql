@@ -1,3 +1,1 @@
-INSERT INTO tb_boleto (due_date, total_in_cents, customer, status)
-VALUES
-('2018-01-01', 100000, 'Trillian Company', 'PENDING');
+insert into tb_boleto (id, customer, due_date, status, total_in_cents) values (random_uuid(), 'Trillian Company', '2018-01-01', 'PENDING', 2458.74);
