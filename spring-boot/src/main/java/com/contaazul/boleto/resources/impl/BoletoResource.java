@@ -1,6 +1,7 @@
-package com.contaazul.boleto.resources;
+package com.contaazul.boleto.resources.impl;
 
 import com.contaazul.boleto.beans.BoletoBean;
+import com.contaazul.boleto.resources.IBoletoResource;
 import com.contaazul.boleto.services.BoletoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,8 +15,8 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rest/bankslips")
-public class BoletoResource {
+@RequestMapping("/bankslips")
+public class BoletoResource implements IBoletoResource {
 
     @Autowired
     private BoletoService boletoService;

@@ -1,8 +1,6 @@
 package com.contaazul.boleto;
 
-import com.contaazul.boleto.entities.Boleto;
-import com.contaazul.boleto.repositories.BoletoRepository;
-import lombok.extern.log4j.Log4j2;
+import com.contaazul.boleto.configs.InitializerApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,16 +8,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.convert.Jsr310Converters;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-
 @EntityScan(basePackageClasses = {Jsr310Converters.class}, basePackages = "com.contaazul.boleto.entities")
 @SpringBootApplication
-@Log4j2
 public class BoletoApplication implements CommandLineRunner {
 
     @Autowired
-    private BoletoRepository boletoRepository;
+    private InitializerApplication initializerApplication;
 
     public static void main(String[] args) {
         SpringApplication.run(BoletoApplication.class, args);
@@ -27,12 +21,7 @@ public class BoletoApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        log.info("Inserting -> { Boleto com 5 dias de vencido }",
-                boletoRepository.save(Boleto.builder().dueDate(LocalDate.now().minusDays(5))
-                        .totalInCents(new BigDecimal(1000)).customer("Boleto 5 dias vencido").build()));
-
-        log.info("Inserting -> { Boleto com mais de 10 dias de vencido }",
-                boletoRepository.save(Boleto.builder().dueDate(LocalDate.now().minusDays(11))
-                        .totalInCents(new BigDecimal(1000)).customer("Boleto 10 dias vencido").build()));
+        initializerApplication.insertInitials();
     }
+
 }

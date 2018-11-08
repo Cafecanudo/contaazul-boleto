@@ -4,6 +4,7 @@ import com.contaazul.boleto.beans.BoletoBean;
 import com.contaazul.boleto.entities.Boleto;
 import com.contaazul.boleto.entities.enums.StatusEnum;
 import com.contaazul.boleto.exceptions.NoResultExceptionApi;
+import com.contaazul.boleto.exceptions.UnprocessableEntityException;
 import com.contaazul.boleto.repositories.BoletoRepository;
 import com.contaazul.boleto.services.BoletoService;
 import lombok.NonNull;
@@ -12,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -38,7 +39,7 @@ public class BoletoServiceImpl implements BoletoService {
     @Override
     public BoletoBean criarBoleto(BoletoBean boletoBean) {
         log.info("Criando um novo Boleto...");
-        boletoBean.setTotalInCents(String.valueOf(Double.valueOf(boletoBean.getTotalInCents()) / 100.0));
+        boletoBean.setTotalInCents(BigDecimal.valueOf(Double.valueOf(boletoBean.getTotalInCents().doubleValue() / 100.0)));
         return converter(boletoRepository.save(converter(boletoBean)));
     }
 
@@ -51,9 +52,13 @@ public class BoletoServiceImpl implements BoletoService {
     @Override
     public void pagarBoleto(@NonNull String id, @NonNull LocalDate data) {
         Boleto boleto = findById(id);
-        boleto.setStatus(StatusEnum.PAID);
-        boleto.setPaymentDate(data);
-        boletoRepository.save(boleto);
+        if (boleto.getStatus().equals(StatusEnum.PENDING)) {
+            boleto.setStatus(StatusEnum.PAID);
+            boleto.setPaymentDate(data);
+            boletoRepository.save(boleto);
+            return;
+        }
+        throw new UnprocessableEntityException("Ticket is not PENDING");
     }
 
     @Override
@@ -101,7 +106,7 @@ public class BoletoServiceImpl implements BoletoService {
      * @return
      */
     private BigDecimal calculaJuros(BigDecimal valor, double juros, int dias) {
-        return BigDecimal.valueOf(valor.doubleValue() * (1 + (juros / 100.0) * dias)).round(MathContext.DECIMAL32).setScale(2);
+        return BigDecimal.valueOf(valor.doubleValue() * (1 + (juros / 100.0) * dias)).setScale(2, RoundingMode.HALF_EVEN);
     }
 
     /**
@@ -113,7 +118,7 @@ public class BoletoServiceImpl implements BoletoService {
     private Boleto converter(BoletoBean boleto) {
         return Boleto.builder().id(Optional.ofNullable(boleto.getId()).isPresent() ? UUID.fromString(boleto.getId()) : null)
                 .dueDate(boleto.getDueDate())
-                .totalInCents(new BigDecimal(boleto.getTotalInCents()))
+                .totalInCents(boleto.getTotalInCents())
                 .customer(boleto.getCustomer())
                 .paymentDate(boleto.getPaymentDate())
                 .status(boleto.getStatus())
@@ -130,7 +135,7 @@ public class BoletoServiceImpl implements BoletoService {
     private BoletoBean converter(Boleto boleto) {
         return BoletoBean.builder().id(boleto.getId().toString())
                 .dueDate(boleto.getDueDate())
-                .totalInCents(boleto.getTotalInCents().unscaledValue().toString())
+                .totalInCents(boleto.getTotalInCents())
                 .customer(boleto.getCustomer())
                 .paymentDate(boleto.getPaymentDate())
                 .status(boleto.getStatus())

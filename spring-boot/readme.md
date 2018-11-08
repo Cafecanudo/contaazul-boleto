@@ -7,3 +7,6 @@
 
 
 * No momento de ver os detalhes do boleto tem um coluna FINE, não existe documento para saber seu objetivo.
+
+###separação da interface do swagger
+http://localhost:8080/rest/swagger-ui.html

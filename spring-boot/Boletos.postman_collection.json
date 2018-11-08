@@ -20,12 +20,12 @@
 					"raw": "{\n  \"due_date\": \"2018-01-21\",\n  \"total_in_cents\": \"254745\",\n  \"customer\": \"Test -D\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8081/rest/bankslips",
+					"raw": "http://localhost:8080/rest/bankslips",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8081",
+					"port": "8080",
 					"path": [
 						"rest",
 						"bankslips"
@@ -49,12 +49,12 @@
 					"raw": "{\n  \"payment_date\":\"2018-06-30\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8081/rest/bankslips/61ca7463-b1f7-4663-9c0c-651d94c7afdc/payments",
+					"raw": "http://localhost:8080/rest/bankslips/61ca7463-b1f7-4663-9c0c-651d94c7afdc/payments",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8081",
+					"port": "8080",
 					"path": [
 						"rest",
 						"bankslips",
@@ -72,12 +72,12 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8081/rest/bankslips",
+					"raw": "http://localhost:8080/rest/bankslips",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8081",
+					"port": "8080",
 					"path": [
 						"rest",
 						"bankslips"
@@ -93,12 +93,12 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8081/rest/bankslips/61ca7463-b1f7-4663-9c0c-651d94c7afdc",
+					"raw": "http://localhost:8080/rest/bankslips/61ca7463-b1f7-4663-9c0c-651d94c7afdc",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8081",
+					"port": "8080",
 					"path": [
 						"rest",
 						"bankslips",
@@ -115,12 +115,12 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8081/rest/bankslips/61ca7463-b1f7-4663-9c0c-651d94c7afdc",
+					"raw": "http://localhost:8080/rest/bankslips/61ca7463-b1f7-4663-9c0c-651d94c7afdc",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8081",
+					"port": "8080",
 					"path": [
 						"rest",
 						"bankslips",

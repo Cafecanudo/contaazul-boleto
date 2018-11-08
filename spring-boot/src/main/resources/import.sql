@@ -1,1 +1,1 @@
-insert into tb_boleto (id, customer, due_date, status, total_in_cents) values (random_uuid(), 'Trillian Company', '2018-01-01', 'PENDING', 2458.74);
+insert into tb_boleto (id, customer, due_date, status, total_in_cents) values (random_uuid(), 'Trillian Company', '2018-11-01', 'PENDING', 2458.74);
