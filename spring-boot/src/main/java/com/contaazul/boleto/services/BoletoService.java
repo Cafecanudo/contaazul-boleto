@@ -2,6 +2,7 @@ package com.contaazul.boleto.services;
 
 import com.contaazul.boleto.beans.BoletoBean;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface BoletoService {
@@ -12,10 +13,8 @@ public interface BoletoService {
 
     BoletoBean detalhesBoleto(String id);
 
-    void marcarComoPago(String id);
+    void pagarBoleto(String id, LocalDate data);
 
-    /*
-    void update(BoletoBean boletoBean);
+    void cancelarBoleto(String id);
 
-    void delete(Long id);*/
 }

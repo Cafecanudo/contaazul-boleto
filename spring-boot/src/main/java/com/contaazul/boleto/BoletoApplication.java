@@ -29,10 +29,10 @@ public class BoletoApplication implements CommandLineRunner {
     public void run(String... args) {
         log.info("Inserting -> { Boleto com 5 dias de vencido }",
                 boletoRepository.save(Boleto.builder().dueDate(LocalDate.now().minusDays(5))
-                        .totalInCents(new BigDecimal(100000)).customer("Boleto 5 dias vencido").build()));
+                        .totalInCents(new BigDecimal(1000)).customer("Boleto 5 dias vencido").build()));
 
         log.info("Inserting -> { Boleto com mais de 10 dias de vencido }",
                 boletoRepository.save(Boleto.builder().dueDate(LocalDate.now().minusDays(11))
-                        .totalInCents(new BigDecimal(100000)).customer("Boleto 10 dias vencido").build()));
+                        .totalInCents(new BigDecimal(1000)).customer("Boleto 10 dias vencido").build()));
     }
 }

@@ -2,6 +2,7 @@ package com.contaazul.boleto.services.impl;
 
 import com.contaazul.boleto.beans.BoletoBean;
 import com.contaazul.boleto.entities.Boleto;
+import com.contaazul.boleto.entities.enums.StatusEnum;
 import com.contaazul.boleto.exceptions.NoResultExceptionApi;
 import com.contaazul.boleto.repositories.BoletoRepository;
 import com.contaazul.boleto.services.BoletoService;
@@ -11,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
+import java.math.MathContext;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -37,36 +38,40 @@ public class BoletoServiceImpl implements BoletoService {
     @Override
     public BoletoBean criarBoleto(BoletoBean boletoBean) {
         log.info("Criando um novo Boleto...");
-        boletoBean.setTotalInCents(String.format("%.2f", Double.valueOf("1") / 100.0));
-//        boletoBean.setTotalInCents(formatNumberDecimal(boletoBean.getTotalInCents()));
-        System.out.println(boletoBean.getTotalInCents());
+        boletoBean.setTotalInCents(String.valueOf(Double.valueOf(boletoBean.getTotalInCents()) / 100.0));
         return converter(boletoRepository.save(converter(boletoBean)));
     }
 
     @Override
     public BoletoBean detalhesBoleto(@NonNull String id) {
         log.info("Buscando um boleto...");
-        Optional<Boleto> data = boletoRepository.findById(UUID.fromString(id));
-        return data.map(b -> converter(calcularJuros(data.get()))).orElseThrow(() -> new NoResultExceptionApi(NO_FOUND_MESSAGE));
+        return converter(calcularJuros(findById(id)));
     }
 
     @Override
-    public void marcarComoPago(@NonNull String id) {
-
+    public void pagarBoleto(@NonNull String id, @NonNull LocalDate data) {
+        Boleto boleto = findById(id);
+        boleto.setStatus(StatusEnum.PAID);
+        boleto.setPaymentDate(data);
+        boletoRepository.save(boleto);
     }
 
-    public static void main(String[] args) {
-        System.out.println();
+    @Override
+    public void cancelarBoleto(@NonNull String id) {
+        Boleto boleto = findById(id);
+        boleto.setStatus(StatusEnum.CANCELED);
+        boletoRepository.save(boleto);
     }
 
     /**
-     * Formatar numero para decimal 2 casa
+     * Buscar um boleto com ID especifico
      *
-     * @param valor
+     * @param id
      * @return
      */
-    private String formatNumberDecimal(String valor) {
-        return new DecimalFormat("######0.##").format(Double.valueOf(valor));
+    private Boleto findById(@NonNull String id) {
+        Optional<Boleto> data = boletoRepository.findById(UUID.fromString(id));
+        return data.map(b -> data.get()).orElseThrow(() -> new NoResultExceptionApi(NO_FOUND_MESSAGE));
     }
 
     /**
@@ -77,9 +82,13 @@ public class BoletoServiceImpl implements BoletoService {
      */
     private Boleto calcularJuros(Boleto boleto) {
         Long diffDias = ChronoUnit.DAYS.between(boleto.getDueDate(), LocalDate.now());
-        boleto.setTotalInCents(
-                calculaJuros(boleto.getTotalInCents(), diffDias <= 10 ? 0.5D : 1.0, diffDias.intValue())
-        );
+
+        //Verifica se boleto ainda está pendente para poder calcular seu juros.
+        if (boleto.getStatus().equals(StatusEnum.PENDING)) {
+            boleto.setTotalInCents(
+                    calculaJuros(boleto.getTotalInCents(), diffDias <= 10 ? 0.5D : 1.0, diffDias.intValue())
+            );
+        }
         return boleto;
     }
 
@@ -92,7 +101,7 @@ public class BoletoServiceImpl implements BoletoService {
      * @return
      */
     private BigDecimal calculaJuros(BigDecimal valor, double juros, int dias) {
-        return new BigDecimal(valor.doubleValue() * (1 + (juros / 100) * dias));
+        return BigDecimal.valueOf(valor.doubleValue() * (1 + (juros / 100.0) * dias)).round(MathContext.DECIMAL32).setScale(2);
     }
 
     /**
@@ -108,6 +117,7 @@ public class BoletoServiceImpl implements BoletoService {
                 .customer(boleto.getCustomer())
                 .paymentDate(boleto.getPaymentDate())
                 .status(boleto.getStatus())
+                .fine(boleto.getFine())
                 .build();
     }
 
@@ -120,40 +130,11 @@ public class BoletoServiceImpl implements BoletoService {
     private BoletoBean converter(Boleto boleto) {
         return BoletoBean.builder().id(boleto.getId().toString())
                 .dueDate(boleto.getDueDate())
-                .totalInCents(String.valueOf(boleto.getTotalInCents().intValue()))
+                .totalInCents(boleto.getTotalInCents().unscaledValue().toString())
                 .customer(boleto.getCustomer())
                 .paymentDate(boleto.getPaymentDate())
                 .status(boleto.getStatus())
+                .fine(boleto.getFine())
                 .build();
     }
-
-    /*@Override
-    public List<BoletoBean> listarBoletos() {
-        log.info("Listando todos os boletos...");
-        return boletoRepository.findAll().stream().map(boleto -> toBean(boleto)).collect(Collectors.toList());
-    }
-
-    @Override
-    public BoletoBean detalhesBoleto(long id) {
-        log.info("Pesquisando boleto por ID: ", id, "...");
-        Optional<Boleto> data = boletoRepository.findById(id);
-        return data.map(b -> toBean(data.get())).orElseThrow(() -> new NoResultExceptionApi(NO_FOUND_MESSAGE));
-    }
-
-    @Override
-    public BoletoBean criarBoleto(BoletoBean boletoBean) {
-        return null;
-    }
-
-    @Override
-    public void update(BoletoBean boletoBean) {
-
-    }
-
-    @Override
-    public void delete(Long id) {
-
-    }
-
-    */
 }

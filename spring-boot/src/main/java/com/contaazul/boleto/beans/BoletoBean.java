@@ -27,11 +27,11 @@ public class BoletoBean implements Serializable {
     private String id;
 
     @NotNull(message = "Can not be empty")
-    @JsonProperty(value = "due_date", access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(value = "due_date")
     private LocalDate dueDate;
 
     @NotNull(message = "Can not be empty")
-    @JsonProperty(value = "total_in_cents")
+    @JsonProperty("total_in_cents")
     @Size(max = 15, message = "Max 15 characters")
     @BrazilMoneyValidation
     private String totalInCents;
@@ -46,5 +46,5 @@ public class BoletoBean implements Serializable {
     @JsonProperty(value = "payment_date", access = JsonProperty.Access.READ_ONLY)
     private LocalDate paymentDate;
 
-    private LocalDate fine;
+    private String fine;
 }

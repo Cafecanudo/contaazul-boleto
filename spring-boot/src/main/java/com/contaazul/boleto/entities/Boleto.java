@@ -41,6 +41,8 @@ public class Boleto {
 
     private LocalDate paymentDate;
 
+    private String fine;
+
     @PrePersist
     private void setStatusDefault() {
         this.status = Optional.ofNullable(this.status).orElse(StatusEnum.PENDING);
