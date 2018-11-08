@@ -34,10 +34,4 @@ public class GlobalExceptionHandler {
                 Optional.of(except.getMessage()).orElse(except.toString())).stack(except.toString()).build();
     }
 
-    /*@ExceptionHandler(value = {Exception.class})
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ApiErrorResponse unknownException(Exception except) {
-        return ApiErrorResponse.builder().code(HttpStatus.INTERNAL_SERVER_ERROR.ordinal()).status(HttpStatus.INTERNAL_SERVER_ERROR).message(
-                Optional.of(except.getMessage()).orElse(except.toString())).build();
-    }*/
 }
