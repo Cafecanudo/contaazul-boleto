@@ -5,6 +5,7 @@ Desafio foi proposto pela **Pamêlla Hess** da empresa [ContaAzul.com](https://c
 
 ## Tecnologias usadas
 ![](https://pbs.twimg.com/media/DU7GUGCV4AAf90X.jpg =200x)
+![](https://blogs.plos.org/tech/files/2018/03/swagger_logo2-690x244.png =200x)
 
 # Welcome to StackEdit!
 
@@ -172,5 +173,5 @@ http://localhost:8080/rest/swagger-ui.html
 
 Hamcrest
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTc0MDE2Njk0XX0=
+eyJoaXN0b3J5IjpbLTEzMjA3MzI1NF19
 -->
