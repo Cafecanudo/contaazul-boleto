@@ -6,8 +6,9 @@ Desafio foi proposto pela **Pamêlla Hess** da empresa [ContaAzul.com](https://c
 ## Tecnologias usadas
 ![](https://pbs.twimg.com/media/DU7GUGCV4AAf90X.jpg)
 ![](https://blogs.plos.org/tech/files/2018/03/swagger_logo2-690x244.png)
-![](https://avatars2.githubusercontent.com/u/11459762?s=280&v=4)
+![](https://avatars2.githubusercontent.com/u/11459762?s=280&v=4){:height="36px" width="36px"}
 
+![drawing](https://avatars2.githubusercontent.com/u/11459762?s=280&v=4){ width=50% }
 
 
 
@@ -28,5 +29,6 @@ http://localhost:8080/rest/swagger-ui.html
 
 Hamcrest
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTcyNTQyNTEzNCwtMjc3ODM5NTg1XX0=
+eyJoaXN0b3J5IjpbLTE5ODg1MjYxOTcsMTcyNTQyNTEzNCwtMj
+c3ODM5NTg1XX0=
 -->
