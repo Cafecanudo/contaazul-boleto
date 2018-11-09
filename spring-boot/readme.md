@@ -7,11 +7,11 @@
 <p>O objetivo do desafio é construir uma API REST para geração de boletos que será consumido por um módulo de um sistema de gestão financeira de microempresas.<br>
 Desafio foi proposto pela <strong>Pamêlla Hess</strong> da empresa <a href="https://contaazul.com/">ContaAzul.com</a> tendo como documento com as especificações: <a href="https://drive.google.com/file/d/1DvjRBTvnHwlUOoNBwAsvoRF6aKqYm7pP/view">aqui</a></p>
 <h2 id="executando">Executando</h2>
-<pre><code># Para fazer install das LIBs
-mvn clean install -f pom.xml 
-
-# Executando a aplicação
-mvn spring-boot:run
+<h5 id="para-fazer-install-das-libs">Para fazer install das LIBs</h5>
+<pre><code>mvn clean install -f pom.xml 
+</code></pre>
+<h5 id="executando-a-aplicação">Executando a aplicação</h5>
+<pre><code>mvn spring-boot:run
 </code></pre>
 <h2 id="interface-de-testedocumentação">Interface de Teste/Documentação</h2>
 <p>Documentacao da API <a href="http://localhost:8080/rest/swagger-ui.html">http://localhost:8080/rest/swagger-ui.html</a></p>
