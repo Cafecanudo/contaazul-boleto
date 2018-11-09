@@ -4,7 +4,7 @@ O objetivo do desafio é construir uma API REST para geração de boletos que se
 Desafio foi proposto pela **Pamêlla Hess** da empresa [ContaAzul.com](https://contaazul.com/) tendo como documento com as especificações: [aqui](https://drive.google.com/file/d/1DvjRBTvnHwlUOoNBwAsvoRF6aKqYm7pP/view)
 
 ## Tecnologias usadas
-![](https://pbs.twimg.com/media/DU7GUGCV4AAf90X.jpg =200x)
+![](https://pbs.twimg.com/media/DU7GUGCV4AAf90X.jpg =200x32)
 ![](https://blogs.plos.org/tech/files/2018/03/swagger_logo2-690x244.png =200x)
 ![](https://avatars2.githubusercontent.com/u/11459762?s=280&v=4 =70x)
 
@@ -28,5 +28,5 @@ http://localhost:8080/rest/swagger-ui.html
 
 Hamcrest
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzEyODQ3NDAyLC0yNzc4Mzk1ODVdfQ==
+eyJoaXN0b3J5IjpbLTkyNDE3NzAxNSwtMjc3ODM5NTg1XX0=
 -->
