@@ -4,7 +4,6 @@
 ---
 
 <h1 id="api-boleto-contaazul">API Boleto ContaAzul</h1>
-<h2 id="desafio">Desafio:</h2>
 <p>O objetivo do desafio é construir uma API REST para geração de boletos que será consumido por um módulo de um sistema de gestão financeira de microempresas.<br>
 Desafio foi proposto pela <strong>Pamêlla Hess</strong> da empresa <a href="https://contaazul.com/">ContaAzul.com</a> tendo como documento com as especificações: <a href="https://drive.google.com/file/d/1DvjRBTvnHwlUOoNBwAsvoRF6aKqYm7pP/view">aqui</a></p>
 <h2 id="executando">Executando</h2>
