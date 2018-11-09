@@ -50,22 +50,23 @@ public class BoletoServiceImpl implements BoletoService {
     }
 
     @Override
-    public void pagarBoleto(@NonNull String id, @NonNull LocalDate data) {
+    public Boleto pagarBoleto(@NonNull String id, @NonNull LocalDate data) {
         Boleto boleto = findById(id);
         if (boleto.getStatus().equals(StatusEnum.PENDING)) {
             boleto.setStatus(StatusEnum.PAID);
             boleto.setPaymentDate(data);
             boletoRepository.save(boleto);
-            return;
+            return boleto;
         }
         throw new UnprocessableEntityException("Ticket is not PENDING");
     }
 
     @Override
-    public void cancelarBoleto(@NonNull String id) {
+    public Boleto cancelarBoleto(@NonNull String id) {
         Boleto boleto = findById(id);
         boleto.setStatus(StatusEnum.CANCELED);
         boletoRepository.save(boleto);
+        return boleto;
     }
 
     /**
@@ -86,10 +87,7 @@ public class BoletoServiceImpl implements BoletoService {
      * @return
      */
     private Boleto calcularJuros(Boleto boleto) {
-        Long diffDias = diferencaDias(boleto.getDueDate());
-
-        System.out.println("############");
-        System.out.println(diffDias);
+        Long diffDias = ChronoUnit.DAYS.between(boleto.getDueDate(), LocalDate.now());
 
         //Verifica se boleto ainda está pendente para poder calcular seu juros.
         if (boleto.getStatus().equals(StatusEnum.PENDING)) {
@@ -97,15 +95,6 @@ public class BoletoServiceImpl implements BoletoService {
                     calculaJuros(boleto.getTotalInCents(), diffDias <= 10 ? 0.5D : 1.0, diffDias.intValue()));
         }
         return boleto;
-    }
-
-    /**
-     * Retorna a diferena de dias entre o vencimento e a data de HOJE*
-     * @param date
-     * @return
-     */
-    private long diferencaDias(LocalDate date) {
-        return ChronoUnit.DAYS.between(date, LocalDate.now());
     }
 
     /**
