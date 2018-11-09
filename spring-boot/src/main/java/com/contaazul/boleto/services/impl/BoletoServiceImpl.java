@@ -86,15 +86,26 @@ public class BoletoServiceImpl implements BoletoService {
      * @return
      */
     private Boleto calcularJuros(Boleto boleto) {
-        Long diffDias = ChronoUnit.DAYS.between(boleto.getDueDate(), LocalDate.now());
+        Long diffDias = diferencaDias(boleto.getDueDate());
+
+        System.out.println("############");
+        System.out.println(diffDias);
 
         //Verifica se boleto ainda está pendente para poder calcular seu juros.
         if (boleto.getStatus().equals(StatusEnum.PENDING)) {
             boleto.setTotalInCents(
-                    calculaJuros(boleto.getTotalInCents(), diffDias <= 10 ? 0.5D : 1.0, diffDias.intValue())
-            );
+                    calculaJuros(boleto.getTotalInCents(), diffDias <= 10 ? 0.5D : 1.0, diffDias.intValue()));
         }
         return boleto;
+    }
+
+    /**
+     * Retorna a diferena de dias entre o vencimento e a data de HOJE*
+     * @param date
+     * @return
+     */
+    private long diferencaDias(LocalDate date) {
+        return ChronoUnit.DAYS.between(date, LocalDate.now());
     }
 
     /**
@@ -106,7 +117,8 @@ public class BoletoServiceImpl implements BoletoService {
      * @return
      */
     private BigDecimal calculaJuros(BigDecimal valor, double juros, int dias) {
-        return BigDecimal.valueOf(valor.doubleValue() * (1 + (juros / 100.0) * dias)).setScale(2, RoundingMode.HALF_EVEN);
+        return BigDecimal.valueOf(valor.doubleValue() * (1 + (juros / 100.0) * dias))
+                .setScale(2, RoundingMode.HALF_EVEN);
     }
 
     /**
