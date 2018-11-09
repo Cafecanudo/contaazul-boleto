@@ -6,6 +6,29 @@ Desafio foi proposto pela **Pamêlla Hess** da empresa [ContaAzul.com](https://c
 ## Tecnologias usadas
 ![](https://pbs.twimg.com/media/DU7GUGCV4AAf90X.jpg)
 ![](https://blogs.plos.org/tech/files/2018/03/swagger_logo2-690x244.png)
-![](https://avatars2.githubusercontent.com/u/11459762?s=280&v=4)
-# Welcome to StackEdit!
+![](https://avatars2.githubusercontent.com/u/11459762?s=280&v=4){:height="36px" width="36px"}
 
+![drawing](https://avatars2.githubusercontent.com/u/11459762?s=280&v=4){ width=50% }
+
+
+
+* permitir que somente boletos pendentes poderiam calcular seu juros, mas deve salvar o valor pago no momento que altere seu staus para PAID.
+
+* No momento do pagamento do boleto deve diser quanto foi pago, pois não sei possivel saber. sendo que altera o STATUS mas não calcula o valor e não sava o valor que deveria ser pago.
+
+
+* Não ficou claro se é permitido cancelar o boleto mesmo depois de pago. Cancelado é cancelado, não é estornado.
+
+
+* No momento de ver os detalhes do boleto tem um coluna FINE, não existe documento para saber seu objetivo.
+
+###separação da interface do swagger
+http://localhost:8080/rest/swagger-ui.html
+
+
+
+Hamcrest
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE5ODg1MjYxOTcsMTcyNTQyNTEzNCwtMj
+c3ODM5NTg1XX0=
+-->
