@@ -1,9 +1,10 @@
 # API Boleto ContaAzul
 ##### Desafio:
 O objetivo do desafio é construir uma API REST para geração de boletos que será consumido por um módulo de um sistema de gestão financeira de microempresas.
-Desafio foi proposto pela **Pamêlla Hess** da empresa [ContaAzul.](https://contaazul.com/) tendo como documento com as especificações: [aqui](https://drive.google.com/file/d/1DvjRBTvnHwlUOoNBwAsvoRF6aKqYm7pP/view)
+Desafio foi proposto pela **Pamêlla Hess** da empresa [ContaAzul.com](https://contaazul.com/) tendo como documento com as especificações: [aqui](https://drive.google.com/file/d/1DvjRBTvnHwlUOoNBwAsvoRF6aKqYm7pP/view)
 
-
+## Tecnologias usadas
+![](https://pbs.twimg.com/media/DU7GUGCV4AAf90X.jpg =200x)
 
 # Welcome to StackEdit!
 
@@ -171,5 +172,5 @@ http://localhost:8080/rest/swagger-ui.html
 
 Hamcrest
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTU5Mzg5NDRdfQ==
+eyJoaXN0b3J5IjpbNTc0MDE2Njk0XX0=
 -->
