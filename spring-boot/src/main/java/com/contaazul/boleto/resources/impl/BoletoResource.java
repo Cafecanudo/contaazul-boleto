@@ -1,6 +1,7 @@
-package com.contaazul.boleto.resources;
+package com.contaazul.boleto.resources.impl;
 
 import com.contaazul.boleto.beans.BoletoBean;
+import com.contaazul.boleto.resources.IBoletoResource;
 import com.contaazul.boleto.services.BoletoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,16 +10,19 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rest/bankslips")
-public class BoletoResource {
+@RequestMapping("/bankslips")
+public class BoletoResource implements IBoletoResource {
 
     @Autowired
     private BoletoService boletoService;
 
     @GetMapping
+    @ResponseBody
     public List<BoletoBean> listarBoletos() {
         return boletoService.listarBoletos();
     }
@@ -34,34 +38,16 @@ public class BoletoResource {
         return boletoService.detalhesBoleto(id);
     }
 
-    @PostMapping("/{id}/payments")
+    @PostMapping(value = "/{id}/payments", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void marcarComoPago(@NotNull(message = "Id required") @PathVariable String id){
-        boletoService.marcarComoPago(id);
+    public void pagarBoleto(@NotNull(message = "Id required") @PathVariable String id,
+                            @Valid @RequestBody HashMap<String, LocalDate> requestData) {
+        boletoService.pagarBoleto(id, requestData.get("payment_date"));
     }
 
-
-
-
-    /*
-
-
-    @RequestMapping(method = RequestMethod.POST)
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(value = HttpStatus.OK)
-    public BoletoBean criarBoleto(@RequestBody BoletoBean boletoBean) {
-        return boletoService.criarBoleto(boletoBean);
-    }
-
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    @RequestMapping(method = RequestMethod.PUT)
-    public void update(@RequestBody BoletoBean boletoBean) {
-        boletoService.update(boletoBean);
-    }
-
-    @ResponseStatus(value = HttpStatus.OK)
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        boletoService.delete(id);
-    }*/
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void cancelarBoleto(@NotNull(message = "Id required") @PathVariable String id) {
+        boletoService.cancelarBoleto(id);
+    }
 }

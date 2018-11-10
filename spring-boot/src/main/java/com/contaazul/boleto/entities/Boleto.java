@@ -26,20 +26,26 @@ public class Boleto {
     @Column(updatable = false)
     private UUID id;
 
+    @EqualsAndHashCode.Exclude
     @Column(name = "due_date", nullable = false)
     private LocalDate dueDate;
 
+    @EqualsAndHashCode.Exclude
     @Column(name = "total_in_cents", nullable = false)
     private BigDecimal totalInCents;
 
-    @Column(length = 100)
+    @Column(length = 100, nullable = false)
     private String customer;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private StatusEnum status;
 
+    @EqualsAndHashCode.Exclude
     private LocalDate paymentDate;
+
+    @EqualsAndHashCode.Exclude
+    private String fine;
 
     @PrePersist
     private void setStatusDefault() {

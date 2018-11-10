@@ -1,0 +1,134 @@
+{
+	"info": {
+		"_postman_id": "4c2cbbc7-6875-486b-8616-15f3005d1770",
+		"name": "Boletos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Criar Boleto",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"due_date\": \"2018-01-21\",\n  \"total_in_cents\": \"254745\",\n  \"customer\": \"Test -D\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/rest/bankslips",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rest",
+						"bankslips"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pagar Boleto",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"payment_date\":\"2018-06-30\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/rest/bankslips/61ca7463-b1f7-4663-9c0c-651d94c7afdc/payments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rest",
+						"bankslips",
+						"61ca7463-b1f7-4663-9c0c-651d94c7afdc",
+						"payments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Boletos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/rest/bankslips",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rest",
+						"bankslips"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ver Detalhes do Boleto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/rest/bankslips/61ca7463-b1f7-4663-9c0c-651d94c7afdc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rest",
+						"bankslips",
+						"61ca7463-b1f7-4663-9c0c-651d94c7afdc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cancelar Boleto",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/rest/bankslips/61ca7463-b1f7-4663-9c0c-651d94c7afdc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rest",
+						"bankslips",
+						"61ca7463-b1f7-4663-9c0c-651d94c7afdc"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
