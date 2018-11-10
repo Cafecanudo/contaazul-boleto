@@ -2,14 +2,14 @@ package com.contaazul.boleto.repositories;
 
 import com.contaazul.boleto.entities.Boleto;
 import com.contaazul.boleto.entities.enums.StatusEnum;
+import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -27,8 +27,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ActiveProfiles("test")
-@ExtendWith(SpringExtension.class)
-@DisplayName("Test de repositorio de Boletos")
+@RunWith(SpringRunner.class)
 public class BoletoRepositoryTest {
 
     public static final double VALOR_PADRAO_DE_BOLETO = 1000.00;

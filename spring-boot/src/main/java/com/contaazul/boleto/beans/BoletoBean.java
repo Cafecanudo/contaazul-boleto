@@ -1,10 +1,13 @@
 package com.contaazul.boleto.beans;
 
 import com.contaazul.boleto.beans.convertes.BigDecimalToStringSerializer;
+import com.contaazul.boleto.beans.convertes.LocalDateDeserializer;
+import com.contaazul.boleto.beans.convertes.StatusEnumDeserializer;
 import com.contaazul.boleto.entities.enums.StatusEnum;
 import com.contaazul.boleto.validations.annotations.BrazilMoneyValidation;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
@@ -38,6 +41,7 @@ public class BoletoBean implements Serializable {
     @NotNull(message = "Can not be empty")
     @JsonProperty(value = "due_date")
     @JsonSerialize(using = ToStringSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate dueDate;
 
     @ApiModelProperty(notes = "Valor da divída", required = true)
@@ -53,12 +57,13 @@ public class BoletoBean implements Serializable {
     private String customer;
 
     @ApiModelProperty(notes = "Status do Boleto [PENDING, PAID, CANCELED]")
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonDeserialize(using = StatusEnumDeserializer.class)
     private StatusEnum status;
 
     @ApiModelProperty(notes = "Data de pagamento")
-    @JsonProperty(value = "payment_date", access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(value = "payment_date")
     @JsonSerialize(using = ToStringSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate paymentDate;
 
     @ApiModelProperty(notes = "Não sei para que serve(Ainda)")

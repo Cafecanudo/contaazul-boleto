@@ -6,16 +6,15 @@ import com.contaazul.boleto.entities.enums.StatusEnum;
 import com.contaazul.boleto.exceptions.NoResultExceptionApi;
 import com.contaazul.boleto.exceptions.UnprocessableEntityException;
 import com.contaazul.boleto.repositories.BoletoRepository;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -25,7 +24,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@ExtendWith(SpringExtension.class)
+@RunWith(SpringRunner.class)
 @DisplayName("Test de servico de Boletos")
 public class BoletoServiceTest {
 
@@ -35,7 +34,7 @@ public class BoletoServiceTest {
     @Autowired
     private BoletoService boletoService;
 
-    @BeforeEach
+    @Before
     public void inicializarMockito() {
         BDDMockito.given(boletoRepository.save(Boleto.builder().totalInCents(BigDecimal.valueOf(1000)).build()))
                 .willReturn(Boleto.builder()
@@ -49,7 +48,7 @@ public class BoletoServiceTest {
 
     @Test
     @DisplayName("Test criar de boleto")
-    void criarBoleto() {
+    public void criarBoleto() {
         BoletoBean b = boletoService.criarBoleto(BoletoBean.builder().totalInCents(BigDecimal.valueOf(1000)).build());
 
         assertNotNull(b.getId(), "Nao gerou ID do boleto!");
@@ -58,7 +57,7 @@ public class BoletoServiceTest {
 
     @Test
     @DisplayName("Test detalhes de boleto")
-    void detalhesBoleto() {
+    public void detalhesBoleto() {
         BDDMockito.given(boletoRepository.findById(UUID.nameUUIDFromBytes("001".getBytes())))
                 .willReturn(Optional.of(Boleto.builder()
                         .id(UUID.nameUUIDFromBytes("001".getBytes()))
@@ -78,7 +77,7 @@ public class BoletoServiceTest {
 
     @Test
     @DisplayName("Test pagamento de Boleto")
-    void pagarBoleto() {
+    public void pagarBoleto() {
         BDDMockito.given(boletoRepository.findById(UUID.nameUUIDFromBytes("001".getBytes())))
                 .willReturn(Optional.of(Boleto.builder()
                         .id(UUID.nameUUIDFromBytes("001".getBytes()))
@@ -109,7 +108,7 @@ public class BoletoServiceTest {
 
     @Test
     @DisplayName("Test cancelamento do boleto")
-    void cancelarBoleto() {
+    public void cancelarBoleto() {
         BDDMockito.given(boletoRepository.findById(UUID.nameUUIDFromBytes("001".getBytes())))
                 .willReturn(Optional.of(Boleto.builder()
                         .id(UUID.nameUUIDFromBytes("001".getBytes()))
