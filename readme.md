@@ -1,4 +1,7 @@
 <h1 id="api-boleto-contaazul">API Boleto ContaAzul</h1>
+
+<a href="https://travis-ci.com/Cafecanudo/contaazul-boleto"><img src="https://travis-ci.com/Cafecanudo/contaazul-boleto.svg?branch=master" alt="Build Status"></a>
+
 <p>O objetivo do desafio é construir uma API REST para geração de boletos que será consumido por um módulo de um sistema de gestão financeira de microempresas.<br>
 Desafio foi proposto pela <strong>Pamêlla Hess</strong> da empresa <a href="https://contaazul.com/">ContaAzul.com</a> tendo como documento com as especificações: <a href="https://drive.google.com/file/d/1DvjRBTvnHwlUOoNBwAsvoRF6aKqYm7pP/view">aqui</a></p>
 <h2 id="executando">Executando</h2>
@@ -10,7 +13,12 @@ Desafio foi proposto pela <strong>Pamêlla Hess</strong> da empresa <a href="htt
 </code></pre>
 <h2 id="interface-de-testedocumentação">Interface de Teste/Documentação</h2>
 <p>Documentacao da API <a href="http://localhost:8080/rest/swagger-ui.html">http://localhost:8080/rest/swagger-ui.html</a></p>
+<h2 id="coverage">Coverage</h2>
 <h2 id="observações-e-melhorias-sobre-a-documentaçãoregras">Observações e melhorias sobre a documentação(Regras)</h2>
+<p>
+  <img src="images/unidade-test.png">
+<img src="images/coverage.png">
+</p>
 <ul>
 <li>Não esta na documentação, porém, a implementação permite somente que boletos PENDING possam ser calculados os juros.</li>
 <li>Seria importante salvar o valor pago pelo BOLETO no momento que alterar seu STATUS para PAID, sem isso não será possível recuperar essa informação.</li>
