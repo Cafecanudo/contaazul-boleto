@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 @Builder
 public class ApiErrorResponse {
 
+    private HttpStatus status;
     private int code;
     private String message;
     private String stack;
