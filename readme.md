@@ -1,8 +1,25 @@
 <h1 id="api-boleto-contaazul">API Boleto ContaAzul</h1>
 
-<a href="https://travis-ci.com/Cafecanudo/contaazul-boleto"><img src="https://travis-ci.com/Cafecanudo/contaazul-boleto.svg?branch=master" alt="Build Status"></a>
+<a href="https://travis-ci.com/Cafecanudo/contaazul-boleto">
+  <img src="https://travis-ci.com/Cafecanudo/contaazul-boleto.svg?branch=master" alt="Build Status">
+</a>
 <a href="https://sonarcloud.io/dashboard/index/key.com.contaazul.boletos">
-  <img src="https://sonarcloud.io/api/badges/gate?key=key.com.contaazul.boletos" alt="Quality Gate">
+  <img src="https://sonarcloud.io/api/project_badges/measure?project=key.com.contaazul.boletos&metric=ncloc">
+</a>
+<a href="https://sonarcloud.io/dashboard/index/key.com.contaazul.boletos">
+  <img src="https://sonarcloud.io/api/project_badges/measure?project=key.com.contaazul.boletos&metric=alert_status">
+</a>
+<a href="https://sonarcloud.io/dashboard/index/key.com.contaazul.boletos">
+  <img src="https://sonarcloud.io/api/project_badges/measure?project=key.com.contaazul.boletos&metric=code_smells">
+</a>
+<a href="https://sonarcloud.io/dashboard/index/key.com.contaazul.boletos">
+  <img src="https://sonarcloud.io/api/project_badges/measure?project=key.com.contaazul.boletos&metric=duplicated_lines_density">
+</a>
+<a href="https://sonarcloud.io/dashboard/index/key.com.contaazul.boletos">
+  <img src="https://sonarcloud.io/api/project_badges/measure?project=key.com.contaazul.boletos&metric=bugs">
+</a>
+<a href="https://sonarcloud.io/dashboard/index/key.com.contaazul.boletos">
+  <img src="https://sonarcloud.io/api/project_badges/measure?project=key.com.contaazul.boletos&metric=vulnerabilities">
 </a>
 <p>O objetivo do desafio é construir uma API REST para geração de boletos que será consumido por um módulo de um sistema de gestão financeira de microempresas.<br>
 Desafio foi proposto pela <strong>Pamêlla Hess</strong> da empresa <a href="https://contaazul.com/">ContaAzul.com</a> tendo como documento com as especificações: <a href="https://drive.google.com/file/d/1DvjRBTvnHwlUOoNBwAsvoRF6aKqYm7pP/view">aqui</a></p>
