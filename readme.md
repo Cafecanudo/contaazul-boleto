@@ -1,7 +1,9 @@
 <h1 id="api-boleto-contaazul">API Boleto ContaAzul</h1>
 
 <a href="https://travis-ci.com/Cafecanudo/contaazul-boleto"><img src="https://travis-ci.com/Cafecanudo/contaazul-boleto.svg?branch=master" alt="Build Status"></a>
-
+<a href="https://sonarcloud.io/dashboard/index/key.com.contaazul.boletos">
+  <img src="https://sonarcloud.io/api/badges/gate?key=key.com.contaazul.boletos" alt="Quality Gate">
+</a>
 <p>O objetivo do desafio é construir uma API REST para geração de boletos que será consumido por um módulo de um sistema de gestão financeira de microempresas.<br>
 Desafio foi proposto pela <strong>Pamêlla Hess</strong> da empresa <a href="https://contaazul.com/">ContaAzul.com</a> tendo como documento com as especificações: <a href="https://drive.google.com/file/d/1DvjRBTvnHwlUOoNBwAsvoRF6aKqYm7pP/view">aqui</a></p>
 <h2 id="executando">Executando</h2>
@@ -11,7 +13,6 @@ Desafio foi proposto pela <strong>Pamêlla Hess</strong> da empresa <a href="htt
 <h5 id="executando-a-aplicação">Executando a aplicação</h5>
 <pre><code>mvn spring-boot:run
 </code></pre>
-
 <h5 id="executando-a-aplicação">Executando teste de avaliação com SonarCube</h5>
 <pre>
 <code>mvn sonar: sonar \
@@ -21,12 +22,6 @@ Desafio foi proposto pela <strong>Pamêlla Hess</strong> da empresa <a href="htt
   -Dsonar.login = ccdb1d261679f21e9ab3cdb3724ef3f05c45f29e
 </code>
 </pre>
-
-
-
-
-
-
 <h2 id="interface-de-testedocumentação">Interface de Teste/Documentação</h2>
 <p>Documentacao da API <a href="http://localhost:8080/rest/swagger-ui.html">http://localhost:8080/rest/swagger-ui.html</a></p>
 <h2 id="coverage">Coverage</h2>
