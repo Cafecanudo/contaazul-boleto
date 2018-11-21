@@ -33,7 +33,7 @@ public class BoletoServiceImpl implements BoletoService {
     @Override
     public List<BoletoBean> listarBoletos() {
         log.info("Listando todos os boletos...");
-        return boletoRepository.findAll().stream().map(boleto -> converter(boleto)).collect(Collectors.toList());
+        return boletoRepository.findAll().stream().map(this::converter).collect(Collectors.toList());
     }
 
     @Override
