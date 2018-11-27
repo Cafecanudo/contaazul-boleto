@@ -22,7 +22,11 @@
   <img src="https://sonarcloud.io/api/project_badges/measure?project=key.com.contaazul.boletos&metric=vulnerabilities">
 </a>
 <p>O objetivo do desafio é construir uma API REST para geração de boletos que será consumido por um módulo de um sistema de gestão financeira de microempresas.<br>
-Desafio foi proposto pela <strong>Pamêlla Hess</strong> da empresa <a href="https://contaazul.com/">ContaAzul.com</a> tendo como documento com as especificações: <a href="https://drive.google.com/file/d/1DvjRBTvnHwlUOoNBwAsvoRF6aKqYm7pP/view">aqui</a></p>
+Trabalho foi solicitado pela <strong>Pamêlla Hess</strong> da empresa <a href="https://contaazul.com/">ContaAzul.com</a> tendo como documento com as especificações: <a href="https://drive.google.com/file/d/1DvjRBTvnHwlUOoNBwAsvoRF6aKqYm7pP/view">aqui</a></p>
+<h2 id="executando">Tempo de Desenvolvimento</h2>
+<p>Base de arquitetura(Backend) deste projeto teve <b>12 horas</b> de desenvolvimento deste sua concepção à implementação de teste e desenvolvimento.<br/>
+  Usa <b>JUnit</b> e <b>Powermock</b> para implementação de teste unitário e integrados.
+</p>
 <h2 id="executando">Executando</h2>
 <h5 id="para-fazer-install-das-libs">Para fazer install das LIBs</h5>
 <pre><code>mvn clean install -f pom.xml 
